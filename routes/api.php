@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\AddressController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +16,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+Route::prefix('users')->group(function () {
+    Route::get('/', [UserController::class, 'index']);
+
+    Route::get('/{id}', [UserController::class, 'getById']);
+
+    Route::put('/{id}', [UserController::class, 'update']);
+});
+
+Route::prefix('address')->group(function () {
+    Route::post('/', [AddressController::class, 'store']);
+
+    Route::put('/{id}', [AddressController::class, 'update']);
+
+    Route::delete('/{id}', [AddressController::class, 'delete']);
 });
