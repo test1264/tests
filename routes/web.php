@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PagesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('admin')->group(function () {
+    Route::get('/', [PagesController::class, 'admin']);
+    Route::post('/', [PagesController::class, 'store']);
+});
+
+Route::get('/{page}', [PagesController::class, 'show']);
