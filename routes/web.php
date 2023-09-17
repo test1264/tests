@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PagesController;
-
+use App\Http\Controllers\MailController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -22,5 +22,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/', [PagesController::class, 'admin']);
     Route::post('/', [PagesController::class, 'store']);
 });
+
+Route::get('/sendmail', [MailController::class, 'sendmail']);
 
 Route::get('/{page}', [PagesController::class, 'show']);
